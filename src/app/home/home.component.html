@@ -1,1 +1,24 @@
-home
+<section class="home-app">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="seach-city-section">
+          <h5>Jhon Smith</h5>
+          <a href="javascript:void(0)" class="btn btn-primary"
+            >https//github/smithjohn</a
+          >
+          <div class="search-field">
+            <mat-form-field appearance="outline">
+              <mat-label>Search City</mat-label>
+              <input matInput #message maxlength="256" placeholder="Search" />
+              <mat-icon matPrefix>search</mat-icon>
+            </mat-form-field>
+            <button mat-flat-button color="primary">
+              {{ displayWweather }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

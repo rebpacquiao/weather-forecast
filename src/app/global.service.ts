@@ -12,6 +12,9 @@ const data = {
   logout: {
     label: 'logout',
   },
+  displayWeather: {
+    label: 'Display Weather',
+  },
 };
 
 @Injectable({
@@ -22,5 +25,6 @@ export class GlobalService {
   public description: string = data.description;
   public login: string = data.login.label;
   public logout: string = data.logout.label;
+  public displayWeather: string = data.displayWeather.label;
   constructor() {}
 }

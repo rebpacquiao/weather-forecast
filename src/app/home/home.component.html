@@ -10,10 +10,14 @@
           <div class="search-field">
             <mat-form-field appearance="outline">
               <mat-label>Search City</mat-label>
-              <input matInput #message maxlength="256" placeholder="Search" />
+              <input matInput #cityInput maxlength="256" placeholder="Search" />
               <mat-icon matPrefix>search</mat-icon>
             </mat-form-field>
-            <button mat-flat-button color="primary">
+            <button
+              (click)="fetchWeather(cityInput.value)"
+              mat-flat-button
+              color="primary"
+            >
               {{ displayWeather }}
             </button>
           </div>

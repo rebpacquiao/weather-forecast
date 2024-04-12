@@ -1,6 +1,11 @@
 <div class="login-section">
   <p>{{ weatherForcastDescription }}</p>
-  <button mat-flat-button color="primary" class="default-btn">
+  <button
+    (click)="handleAuth()"
+    mat-flat-button
+    color="primary"
+    class="default-btn"
+  >
     {{ loginLabel }}
   </button>
 </div>

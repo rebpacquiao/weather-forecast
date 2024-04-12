@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { WeatherData } from '../model/weather-data.model';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 import {
   HttpClientModule,
@@ -26,6 +27,7 @@ import {
     HttpClientModule,
     MatTableModule,
     MatProgressBarModule,
+    CommonModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

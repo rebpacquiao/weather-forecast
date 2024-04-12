@@ -21,22 +21,31 @@
               {{ displayWeather }}
             </button>
           </div>
-          <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <ng-container matColumnDef="property">
-              <mat-header-cell *matHeaderCellDef> Property </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{ element[0] }} </mat-cell>
-            </ng-container>
 
-            <ng-container matColumnDef="value">
-              <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{ element[1] }} </mat-cell>
-            </ng-container>
+          <div class="data-table">
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="property">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{ element[0] }}
+                </mat-cell>
+              </ng-container>
 
-            <mat-header-row
-              *matHeaderRowDef="displayedColumns"
-            ></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-          </mat-table>
+              <ng-container matColumnDef="value">
+                <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                  {{ element[1] }}
+                </mat-cell>
+              </ng-container>
+
+              <mat-header-row
+                *matHeaderRowDef="displayedColumns"
+              ></mat-header-row>
+              <mat-row
+                *matRowDef="let row; columns: displayedColumns"
+              ></mat-row>
+            </mat-table>
+          </div>
         </div>
       </div>
     </div>

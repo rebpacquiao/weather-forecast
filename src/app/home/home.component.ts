@@ -38,6 +38,8 @@ export class HomeComponent implements OnInit {
   displayedColumns: string[] = ['property', 'value'];
   dataSource: MatTableDataSource<any>;
 
+  isFetching: boolean = false;
+
   constructor(
     private globalService: GlobalService,
     private httpClient: HttpClient,
@@ -50,18 +52,28 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
   fetchWeather(city: string) {
+    if (this.isFetching) {
+      console.log('Already fetching data, please wait...');
+      return;
+    }
+
+    this.isFetching = true; // Set flag to true before fetching
+
     const headers = new HttpHeaders({
       'X-Api-Key': this.apiKey,
     });
 
     console.log('Fetching weather data');
-
     this.http
-      .get<any>(`https://api.api-ninjas.com/v1/weather?city=${city}`, {
-        headers,
-      })
+      .get<WeatherData[]>(
+        `https://api.api-ninjas.com/v1/weather?city=${city}`,
+        {
+          headers,
+        }
+      )
       .subscribe(
         (data) => {
+          console.log(data);
           this.weatherData = data;
           this.dataSource = new MatTableDataSource<any>(
             Object.entries(this.weatherData)
@@ -69,6 +81,9 @@ export class HomeComponent implements OnInit {
         },
         (error) => {
           console.error('Error:', error);
+        },
+        () => {
+          this.isFetching = false; // Reset flag after request completes
         }
       );
   }

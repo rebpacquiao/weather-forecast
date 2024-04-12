@@ -69,12 +69,9 @@ export class HomeComponent implements OnInit {
 
     console.log('Fetching weather data');
     this.http
-      .get<WeatherData[]>(
-        `https://api.api-ninjas.com/v1/weather?city=${city}`,
-        {
-          headers,
-        }
-      )
+      .get<WeatherData[]>(`${this.baseUrl}weather?city=${city}`, {
+        headers,
+      })
       .subscribe(
         (data) => {
           console.log(data);

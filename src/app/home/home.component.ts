@@ -4,7 +4,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { GlobalService } from '../global.service';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { environment } from '../environments';
+
+import {
+  HttpClientModule,
+  HttpClient,
+  HttpHeaders,
+} from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -21,26 +27,37 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   displayWeather: string;
+  weatherData: any[] = [];
   data: any[] = [];
+  city = 'london';
 
   constructor(
     private globalService: GlobalService,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private http: HttpClient
   ) {
     this.displayWeather = globalService.displayWeather;
   }
 
   ngOnInit(): void {
-    this.fetchData();
+    this.fetchWeather();
   }
 
-  fetchData() {
-    console.log('Fetching data');
-    this.httpClient
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .subscribe((data: any) => {
-        console.log(data);
-        this.data = data;
-      });
+  fetchWeather() {
+    const headers = new HttpHeaders({
+      'X-Api-Key': environment.apiKey,
+    });
+
+    this.http
+      .get<any>(`${environment.baseUrl}weather?city=${this.city}`, { headers })
+      .subscribe(
+        (data) => {
+          this.weatherData = data;
+          console.log(this.weatherData);
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
   }
 }

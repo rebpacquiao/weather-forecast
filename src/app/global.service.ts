@@ -6,8 +6,11 @@ const data = {
   },
   description:
     'Welcome to the weather forecast web application, Please login with your github to use the application and view the weather in your city.',
-  button: {
+  login: {
     label: 'login',
+  },
+  logout: {
+    label: 'logout',
   },
 };
 
@@ -16,5 +19,8 @@ const data = {
 })
 export class GlobalService {
   public weatherForcast: string = data.GlobalService.weatherForcast;
+  public description: string = data.description;
+  public login: string = data.login.label;
+  public logout: string = data.logout.label;
   constructor() {}
 }

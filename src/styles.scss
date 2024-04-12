@@ -41,7 +41,47 @@ $angular-app-theme: mat.define-light-theme(
   margin: 0;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+.cloud {
+  border-radius: 1em;
+  margin-right: 1em;
+  width: 2em;
+  height: 0.75em;
+  background-color: #3f55c1;
+  font-size: 1em;
+  margin-top: 0.5em;
+
+  &:before {
+    width: 0.5em;
+    height: 0.5em;
+    background-color: #3f55c1;
+    border-radius: 1em;
+    display: block;
+    position: relative;
+    content: "";
+    top: -0.3em;
+    left: 0.3em;
+  }
+
+  &:after {
+    display: block;
+    content: "";
+    width: 1em;
+    height: 1em;
+    background-color: #3f55c1;
+    border-radius: 1em;
+    margin-top: -1em;
+    margin-left: 0.6em;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.logout-btn {
+  padding: 0.1em 1em;
+  font-size: 14px;
+  border: 0;
+  color: #000;
+  border: 1px solid #ddd;
 }

@@ -1,3 +1,9 @@
 <main class="main">
+  <mat-toolbar>
+    <div class="cloud"></div>
+    <span>{{ weatherForcast }}</span>
+    <span class="spacer"></span>
+    <button class="logout-btn">{{ logoutLabel }}</button>
+  </mat-toolbar>
   <router-outlet></router-outlet>
 </main>

@@ -4,6 +4,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { GlobalService } from '../global.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { WeatherData } from '../model/weather-data.model';
 
 import {
   HttpClientModule,
@@ -20,16 +23,20 @@ import {
     MatIconModule,
     MatButtonModule,
     HttpClientModule,
+    MatTableModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   displayWeather: string;
-  weatherData: any[] = [];
+  weatherData: WeatherData[] = [];
   data: any[] = [];
   baseUrl: string = 'https://api.api-ninjas.com/v1/';
   apiKey: string = '0Y4MW7Ctv0gMpJAkSoGnM4oT9s59wvsnz0oYYt5C';
+
+  displayedColumns: string[] = ['property', 'value'];
+  dataSource: MatTableDataSource<any>;
 
   constructor(
     private globalService: GlobalService,
@@ -37,6 +44,7 @@ export class HomeComponent implements OnInit {
     private http: HttpClient
   ) {
     this.displayWeather = globalService.displayWeather;
+    this.dataSource = new MatTableDataSource<any>([]); // Initialize dataSource here
   }
 
   ngOnInit(): void {}
@@ -55,7 +63,9 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (data) => {
           this.weatherData = data;
-          console.log(this.weatherData);
+          this.dataSource = new MatTableDataSource<any>(
+            Object.entries(this.weatherData)
+          );
         },
         (error) => {
           console.error('Error:', error);

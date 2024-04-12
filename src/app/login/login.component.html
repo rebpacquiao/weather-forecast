@@ -1,16 +1,8 @@
-<div class="w-100">
+<section id="loginApp">
   <mat-toolbar>
     <div class="cloud"></div>
-
-    <span>Weather Forecast</span>
+    <span>{{ weatherForcast }}</span>
     <span class="spacer"></span>
-    <button
-      mat-icon-button
-      class="example-icon favorite-icon"
-      aria-label="Example icon-button with heart icon"
-    >
-      <mat-icon>favorite</mat-icon>
-    </button>
     <button
       mat-icon-button
       class="example-icon"
@@ -19,4 +11,7 @@
       <mat-icon>share</mat-icon>
     </button>
   </mat-toolbar>
-</div>
+  <div class="container welcome-container">
+    <app-welcome></app-welcome>
+  </div>
+</section>

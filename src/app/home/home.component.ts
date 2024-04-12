@@ -7,6 +7,7 @@ import { GlobalService } from '../global.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 import { WeatherData } from '../model/weather-data.model';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import {
   HttpClientModule,
@@ -24,6 +25,7 @@ import {
     MatButtonModule,
     HttpClientModule,
     MatTableModule,
+    MatProgressBarModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -74,6 +76,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.isFetching = false;
           this.weatherData = data;
           this.dataSource = new MatTableDataSource<any>(
             Object.entries(this.weatherData)

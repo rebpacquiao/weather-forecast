@@ -23,6 +23,10 @@
           </div>
 
           <div class="data-table">
+            <div *ngIf="isFetching">
+              <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+
             <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
               <ng-container matColumnDef="property">
                 <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>

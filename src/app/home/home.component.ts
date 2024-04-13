@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { WeatherData } from '../model/weather-data.model';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {
   HttpClientModule,
@@ -45,10 +46,20 @@ export class HomeComponent implements OnInit {
 
   isFetching: boolean = false;
 
+  country: string = '';
+  reelFeal: string = '';
+  humidity: string = '';
+  pressure: string = '';
+  windDeg: string = '';
+  windGust: string = '';
+  windSpeed: string = '';
+  weatherDate: string = '';
+
   constructor(
     private globalService: GlobalService,
     private httpClient: HttpClient,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {
     this.displayWeather = globalService.displayWeather;
     this.dataSource = new MatTableDataSource<any>([]); // Initialize dataSource here
@@ -70,7 +81,7 @@ export class HomeComponent implements OnInit {
 
     console.log('Fetching weather data');
     this.http
-      .get<WeatherData[]>(
+      .get<any>(
         `${this.baseUrl}/weather?q=${city}&appid=${this.apiKey}&units=${this.units}`
       )
       .subscribe(
@@ -81,6 +92,46 @@ export class HomeComponent implements OnInit {
           this.dataSource = new MatTableDataSource<any>(
             Object.entries(this.weatherData)
           );
+
+          if (data.name) {
+            this.country = data.name;
+            this.cdr.detectChanges();
+          }
+
+          if (data.timezone) {
+            // Convert the timezone offset from seconds to milliseconds
+            const timezoneOffsetInMs = data.timezone * 1000;
+
+            const date = new Date();
+
+            const utcTimeInMs =
+              date.getTime() + date.getTimezoneOffset() * 60 * 1000;
+
+            const localTimeInMs = utcTimeInMs + timezoneOffsetInMs;
+
+            const localDate = new Date(localTimeInMs);
+
+            this.weatherDate = new Intl.DateTimeFormat('en-US').format(
+              localDate
+            );
+
+            this.cdr.detectChanges();
+          }
+
+          if (data && data.main) {
+            console.log('Main weather data:', data.main);
+            this.reelFeal = data.main.feels_like;
+            this.humidity = data.main.humidity;
+            this.pressure = data.main.pressure;
+            this.cdr.detectChanges();
+          }
+
+          if (data.wind) {
+            this.windDeg = data.wind.deg;
+            this.windGust = data.wind.gust;
+            this.windSpeed = data.wind.speed;
+            this.cdr.detectChanges();
+          }
         },
         (error) => {
           console.error('Error:', error);

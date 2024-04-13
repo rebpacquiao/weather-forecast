@@ -15,7 +15,7 @@
               (click)="fetchWeather(cityInput.value)"
               color="primary"
             >
-              {{ displayWeather }}
+              Search City
             </button>
           </div>
         </div>
@@ -24,8 +24,8 @@
   </div>
   <div class="container">
     <div class="weather__body">
-      <h1 class="weather__city"></h1>
-      <div class="weather__datetime"></div>
+      <h1 class="weather__city">{{ country }}</h1>
+      <div class="weather__datetime">{{ weatherDate }}</div>
 
       <div class="weather__icon"></div>
       <p class="weather__temperature"></p>
@@ -36,28 +36,43 @@
         <i class="fa-solid fa-temperature-full"></i>
         <div>
           <p>Real Feel</p>
-          <p class="weather__realfeel">18</p>
+          <p class="weather__realfeel" id="reelFeal">
+            {{ reelFeal }}
+          </p>
         </div>
       </div>
       <div class="weather__card">
         <i class="fa-solid fa-droplet"></i>
         <div>
           <p>Humidity</p>
-          <p class="weather__humidity">18</p>
+          <p class="weather__humidity">{{ humidity }}</p>
         </div>
       </div>
       <div class="weather__card">
         <i class="fa-solid fa-wind"></i>
-        <div>
+        <div class="wind-heading">
           <p>Wind</p>
-          <p class="weather__wind">18</p>
+          <div class="wind-container">
+            <span class="wind-item">
+              <label>Deg</label>
+              <p class="weather__realfeel" id="reelFeal">{{ windDeg }}</p>
+            </span>
+            <span class="wind-item">
+              <label>Gust</label>
+              <p class="weather__realfeel" id="reelFeal">{{ windGust }}</p>
+            </span>
+            <span class="wind-item">
+              <label>Speed</label>
+              <p class="weather__realfeel" id="reelFeal">{{ windSpeed }}</p>
+            </span>
+          </div>
         </div>
       </div>
       <div class="weather__card">
         <i class="fa-solid fa-gauge-high"></i>
         <div>
           <p>Pressure</p>
-          <p class="weather__pressure">18</p>
+          <p class="weather__pressure">{{ pressure }}</p>
         </div>
       </div>
     </div>

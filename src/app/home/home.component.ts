@@ -144,6 +144,12 @@ export class HomeComponent implements OnInit {
         },
         (error) => {
           console.error('Error:', error);
+          if (error.status === 404) {
+            this.isFetching = false;
+            alert(
+              'Sorry, the city you entered could not be found. Please check the spelling or try another city.'
+            );
+          }
         },
         () => {
           this.isFetching = false; // Reset flag after request completes

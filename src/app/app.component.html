@@ -4,7 +4,7 @@
     <span>{{ weatherForcast }}</span>
     <span class="spacer"></span>
 
-    <form>
+    <form *ngIf="isLoggedIn">
       <div class="d-flex user-details">
         <span class="github-link"
           ><a

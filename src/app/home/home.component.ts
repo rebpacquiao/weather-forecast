@@ -54,6 +54,8 @@ export class HomeComponent implements OnInit {
   windGust: string = '';
   windSpeed: string = '';
   weatherDate: string = '';
+  temp: string = '';
+  weatherDescription: string = '';
 
   constructor(
     private globalService: GlobalService,
@@ -123,6 +125,7 @@ export class HomeComponent implements OnInit {
             this.reelFeal = data.main.feels_like;
             this.humidity = data.main.humidity;
             this.pressure = data.main.pressure;
+            this.temp = data.main.temp;
             this.cdr.detectChanges();
           }
 
@@ -130,6 +133,11 @@ export class HomeComponent implements OnInit {
             this.windDeg = data.wind.deg;
             this.windGust = data.wind.gust;
             this.windSpeed = data.wind.speed;
+            this.cdr.detectChanges();
+          }
+
+          if (data.weather && data.weather.length > 0) {
+            this.weatherDescription = data.weather[0].description;
             this.cdr.detectChanges();
           }
         },

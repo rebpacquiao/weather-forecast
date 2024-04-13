@@ -4,4 +4,17 @@
   border-radius: 0.5em;
   color: white;
   padding: 0.5em 2em;
+  width: 150px;
+  margin: 0 auto;
+}
+
+.login-section {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  min-width: 480px;
+  max-width: 300px;
+  margin: 0 auto;
 }

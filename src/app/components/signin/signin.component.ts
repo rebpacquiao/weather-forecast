@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { GlobalService } from '../../global.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-signin',
@@ -13,7 +14,11 @@ export class SigninComponent {
   weatherForcastDescription: string;
   loginLabel: string;
 
-  constructor(private auth: AuthService, private globalService: GlobalService) {
+  constructor(
+    private auth: AuthService,
+    private globalService: GlobalService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.weatherForcastDescription = globalService.description;
     this.loginLabel = globalService.login;
   }
@@ -21,5 +26,10 @@ export class SigninComponent {
     const response = await this.auth.signInWithGithub();
 
     console.log(response);
+  }
+
+  ngOninit() {
+    window.location.reload();
+    this.cdr.detectChanges();
   }
 }

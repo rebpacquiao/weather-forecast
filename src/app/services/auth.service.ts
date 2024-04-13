@@ -17,17 +17,28 @@ export class AuthService {
       environment.supabase.key
     );
 
-    this.supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event);
-      console.log(session);
+    // Check if user session exists in storage when AuthService initializes
+    const session = sessionStorage.getItem('supabaseSession');
+    if (session) {
+      const userSession = JSON.parse(session);
+      this.user.next(userSession.currentSession.user);
+    }
 
+    this.supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        this.user.next(session!.user);
+        this.user.next(session?.user ?? null);
+        sessionStorage.setItem(
+          'supabaseSession',
+          JSON.stringify({ currentSession: session })
+        );
         this.router.navigate(['/dashboard']);
-      } else if (event === 'INITIAL_SESSION') {
-        this.user.next(null);
-      } else {
-        this.user.next(null);
+      } else if (
+        event === 'SIGNED_OUT' ||
+        session === undefined ||
+        session === null
+      ) {
+        sessionStorage.removeItem('supabaseSession');
+        this.router.navigate(['/login']);
       }
     });
   }
@@ -40,6 +51,7 @@ export class AuthService {
 
   async signOut() {
     await this.supabase.auth.signOut();
+    sessionStorage.removeItem('supabaseSession');
     this.user.next(null);
   }
 

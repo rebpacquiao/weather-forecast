@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
   weatherDate: string = '';
   temp: string = '';
   weatherDescription: string = '';
+  sysCountry: string = '';
 
   constructor(
     private globalService: GlobalService,
@@ -139,6 +140,11 @@ export class HomeComponent implements OnInit {
 
           if (data.weather && data.weather.length > 0) {
             this.weatherDescription = data.weather[0].description;
+            this.cdr.detectChanges();
+          }
+
+          if (data.sys) {
+            this.sysCountry = data.sys.country;
             this.cdr.detectChanges();
           }
         },

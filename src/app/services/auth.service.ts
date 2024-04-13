@@ -24,6 +24,8 @@ export class AuthService {
       if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
         this.user.next(session!.user);
         this.router.navigate(['/dashboard']);
+      } else if (event === 'INITIAL_SESSION') {
+        this.user.next(null);
       } else {
         this.user.next(null);
       }
@@ -38,6 +40,7 @@ export class AuthService {
 
   async signOut() {
     await this.supabase.auth.signOut();
+    this.user.next(null);
   }
 
   get currentUser() {

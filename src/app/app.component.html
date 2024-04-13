@@ -3,21 +3,24 @@
     <div class="cloud"></div>
     <span>{{ weatherForcast }}</span>
     <span class="spacer"></span>
-    <div class="d-flex user-details">
-      <span class="github-link"
-        ><a
-          class="git-link"
-          target="_blank"
-          href="https://github.com/{{ gitHubLink }}"
-          >Github</a
-        ></span
-      >
-      <span class="mr-2 user-data">{{ userData }}</span>
-      <img src="{{ userAvatar }}" alt="user" class="user-image" />
-      <button (click)="signOut()" type="button" class="logout-btn">
-        {{ logoutLabel }}
-      </button>
-    </div>
+
+    <form>
+      <div class="d-flex user-details">
+        <span class="github-link"
+          ><a
+            class="git-link"
+            target="_blank"
+            [href]="'https://github.com/' + gitHubLink"
+            >Github</a
+          ></span
+        >
+        <span class="mr-2 user-data" [innerHTML]="userData"></span>
+        <img [src]="userAvatar" alt="user" class="user-image" />
+        <button (click)="signOut()" type="button" class="logout-btn">
+          {{ logoutLabel }}
+        </button>
+      </div>
+    </form>
   </mat-toolbar>
 
   <router-outlet></router-outlet>

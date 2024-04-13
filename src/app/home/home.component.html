@@ -3,54 +3,56 @@
     <div class="row">
       <div class="col-md-12">
         <div class="seach-city-section">
-          <h5>Jhon Smith</h5>
-          <a href="javascript:void(0)" class="btn btn-primary"
-            >https//github/smithjohn</a
-          >
           <div class="search-field">
-            <mat-form-field appearance="outline">
-              <mat-label>Search City</mat-label>
-              <input matInput #cityInput maxlength="256" placeholder="Search" />
-              <mat-icon matPrefix>search</mat-icon>
-            </mat-form-field>
+            <input #cityInput maxlength="256" placeholder="Search" />
             <button
+              class=""
               (click)="fetchWeather(cityInput.value)"
-              mat-flat-button
               color="primary"
             >
               {{ displayWeather }}
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="weather__body">
+      <h1 class="weather__city"></h1>
+      <div class="weather__datetime"></div>
 
-          <div class="data-table">
-            <mat-progress-bar
-              *ngIf="isFetching"
-              mode="indeterminate"
-            ></mat-progress-bar>
+      <div class="weather__icon"></div>
+      <p class="weather__temperature"></p>
+    </div>
 
-            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-              <ng-container matColumnDef="property">
-                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                  {{ element[0] }}
-                </mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="value">
-                <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                  {{ element[1] }}
-                </mat-cell>
-              </ng-container>
-
-              <mat-header-row
-                *matHeaderRowDef="displayedColumns"
-              ></mat-header-row>
-              <mat-row
-                *matRowDef="let row; columns: displayedColumns"
-              ></mat-row>
-            </mat-table>
-          </div>
+    <div class="weather__info">
+      <div class="weather__card">
+        <i class="fa-solid fa-temperature-full"></i>
+        <div>
+          <p>Real Feel</p>
+          <p class="weather__realfeel">18</p>
+        </div>
+      </div>
+      <div class="weather__card">
+        <i class="fa-solid fa-droplet"></i>
+        <div>
+          <p>Humidity</p>
+          <p class="weather__humidity">18</p>
+        </div>
+      </div>
+      <div class="weather__card">
+        <i class="fa-solid fa-wind"></i>
+        <div>
+          <p>Wind</p>
+          <p class="weather__wind">18</p>
+        </div>
+      </div>
+      <div class="weather__card">
+        <i class="fa-solid fa-gauge-high"></i>
+        <div>
+          <p>Pressure</p>
+          <p class="weather__pressure">18</p>
         </div>
       </div>
     </div>

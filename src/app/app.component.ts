@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   userData = signal({});
   userAvatar = signal({});
   gitHubLink = signal({});
+  refreshToken = signal({});
 
   constructor(
     private globalService: GlobalService,

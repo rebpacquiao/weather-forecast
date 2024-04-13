@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   logoutLabel: string;
   userData = signal({});
   userAvatar = signal({});
+  gitHubLink = signal({});
 
   constructor(
     private globalService: GlobalService,
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
       if (user && user.user_metadata) {
         this.userData = user.user_metadata['full_name'];
         this.userAvatar = user.user_metadata['avatar_url'];
+        this.gitHubLink = user.user_metadata['user_name'];
         console.log(this.userData, 'full name');
       }
     });

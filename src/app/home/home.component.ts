@@ -10,6 +10,7 @@ import { WeatherData } from '../model/weather-data.model';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 import {
   HttpClientModule,
@@ -37,8 +38,8 @@ export class HomeComponent implements OnInit {
   displayWeather: string;
   weatherData: WeatherData[] = [];
   data: any[] = [];
-  baseUrl: string = 'https://api.openweathermap.org/data/2.5/';
-  apiKey: string = '64f60853740a1ee3ba20d0fb595c97d5';
+  apiKey: string = environment.API_KEY;
+  baseUrl: string = environment.BASE_URL;
   units = 'metric';
 
   displayedColumns: string[] = ['property', 'value'];

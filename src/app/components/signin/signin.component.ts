@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { GlobalService } from '../../global.service';
 
 @Component({
   selector: 'app-signin',
@@ -9,7 +10,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './signin.component.scss',
 })
 export class SigninComponent {
-  constructor(private auth: AuthService) {}
+  weatherForcastDescription: string;
+  loginLabel: string;
+
+  constructor(private auth: AuthService, private globalService: GlobalService) {
+    this.weatherForcastDescription = globalService.description;
+    this.loginLabel = globalService.login;
+  }
   async handleAuth() {
     const response = await this.auth.signInWithGithub();
 

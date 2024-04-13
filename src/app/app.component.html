@@ -3,7 +3,10 @@
     <div class="cloud"></div>
     <span>{{ weatherForcast }}</span>
     <span class="spacer"></span>
-    <button class="logout-btn">{{ logoutLabel }}</button>
+    <button (click)="signOut()" type="button" class="logout-btn">
+      {{ logoutLabel }}
+    </button>
   </mat-toolbar>
+
   <router-outlet></router-outlet>
 </main>

@@ -4,9 +4,14 @@
       <div class="col-md-12">
         <div class="seach-city-section">
           <div class="search-field">
-            <input #cityInput maxlength="256" placeholder="Search" />
+            <input
+              class="search-city"
+              #cityInput
+              maxlength="256"
+              placeholder="Search"
+            />
             <button
-              class=""
+              class="search-btn"
               (click)="fetchWeather(cityInput.value)"
               color="primary"
             >

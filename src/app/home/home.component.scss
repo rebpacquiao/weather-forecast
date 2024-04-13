@@ -9,16 +9,24 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .search-field {
       display: flex;
       align-items: center;
-      justify-content: center;
       margin: 0 auto;
-      flex-direction: column;
-      min-width: 300x;
-      max-width: 300px;
+      flex-direction: row;
+      min-width: 100%;
+      max-width: 100%;
+      gap: 10px;
     }
+  }
+
+  .search-city {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
   }
 
   .data-table {
@@ -28,6 +36,15 @@
   .white-spinner circle {
     stroke: white !important;
   }
+}
+
+.search-btn {
+  background-color: #3f55c1;
+  padding: 10px 20px;
+  color: #fff;
+  border: 0;
+  width: 20%;
+  border-radius: 5px;
 }
 
 .weather__search {

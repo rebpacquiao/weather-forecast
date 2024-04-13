@@ -36,8 +36,9 @@ export class HomeComponent implements OnInit {
   displayWeather: string;
   weatherData: WeatherData[] = [];
   data: any[] = [];
-  baseUrl: string = 'https://api.api-ninjas.com/v1/';
-  apiKey: string = '0Y4MW7Ctv0gMpJAkSoGnM4oT9s59wvsnz0oYYt5C';
+  baseUrl: string = 'https://api.openweathermap.org/data/2.5/';
+  apiKey: string = '64f60853740a1ee3ba20d0fb595c97d5';
+  units = 'metric';
 
   displayedColumns: string[] = ['property', 'value'];
   dataSource: MatTableDataSource<any>;
@@ -69,9 +70,9 @@ export class HomeComponent implements OnInit {
 
     console.log('Fetching weather data');
     this.http
-      .get<WeatherData[]>(`${this.baseUrl}weather?city=${city}`, {
-        headers,
-      })
+      .get<WeatherData[]>(
+        `${this.baseUrl}/weather?q=${city}&appid=${this.apiKey}&units=${this.units}`
+      )
       .subscribe(
         (data) => {
           console.log(data);

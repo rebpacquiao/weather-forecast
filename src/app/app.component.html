@@ -3,9 +3,13 @@
     <div class="cloud"></div>
     <span>{{ weatherForcast }}</span>
     <span class="spacer"></span>
-    <button (click)="signOut()" type="button" class="logout-btn">
-      {{ logoutLabel }}
-    </button>
+    <div class="d-flex user-details">
+      <span class="mr-2 user-data">{{ userData }}</span>
+      <img src="{{ userAvatar }}" alt="user" class="user-image" />
+      <button (click)="signOut()" type="button" class="logout-btn">
+        {{ logoutLabel }}
+      </button>
+    </div>
   </mat-toolbar>
 
   <router-outlet></router-outlet>

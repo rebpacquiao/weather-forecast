@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+// app.component.ts
+import { Component, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { GlobalService } from './global.service';
@@ -10,12 +11,13 @@ import { AuthService } from './services/auth.service';
   standalone: true,
   imports: [RouterOutlet, MatToolbarModule, MatButtonModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   weatherForcast: string;
   logoutLabel: string;
   userData = signal({});
+  userAvatar = signal({});
 
   constructor(
     private globalService: GlobalService,
@@ -24,15 +26,20 @@ export class AppComponent {
   ) {
     this.weatherForcast = globalService.weatherForcast;
     this.logoutLabel = globalService.logout;
-    this.auth.currentUser.subscribe((user) => {
-      //this.userData.set(user);
-      this.userData.set(user?.user_metadata?.['full_name']);
-      console.log(this.userData(), 'full name');
-    });
   }
 
   signOut() {
     this.auth.signOut();
     this.router.navigate(['/login']);
+  }
+
+  ngOnInit(): void {
+    this.auth.currentUser.subscribe((user) => {
+      if (user && user.user_metadata) {
+        this.userData = user.user_metadata['full_name'];
+        this.userAvatar = user.user_metadata['avatar_url'];
+        console.log(this.userData, 'full name');
+      }
+    });
   }
 }

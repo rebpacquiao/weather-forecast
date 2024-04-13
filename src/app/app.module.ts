@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SnakeCaseToTitleCasePipe } from './snake-case-to-title-case.pipe';
+import { StoreModule } from '@ngrx/store';
+import { userReducer } from './reducers/user.reducer';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +28,9 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    StoreModule.forRoot({
+      user: userReducer,
+    }),
   ],
   providers: [WeatherService, { provide: HttpClient, useClass: HttpClient }],
   bootstrap: [AppComponent],

@@ -8,7 +8,6 @@ import { AuthService } from './services/auth.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -50,7 +49,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.auth.currentUser.subscribe((user) => {
       if (user && user.user_metadata) {
-        this.isLoggedIn = true;
+        this.isLoggedIn = user != null;
         console.log(this.isLoggedIn, 'logged in');
         this.userData = user.user_metadata['full_name'];
         this.userAvatar = user.user_metadata['avatar_url'];
